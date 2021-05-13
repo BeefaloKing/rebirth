@@ -13,6 +13,6 @@ private:
 public:
 	SDLExcept(const std::string &message);
 
-	const char* what() const noexcept;
+	const char* what() const noexcept override;
 };
 } // namespace rb
