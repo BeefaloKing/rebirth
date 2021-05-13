@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <cstddef>
 #include <string>
+#include "sprite.hh"
 
 namespace rb {
 class Window
@@ -17,6 +18,9 @@ public:
 
 	// Fills entire window surface with blank color.
 	void clear();
+	// Copies sprite (to given screen coordinates).
+	void blit(const Sprite &sprite);
+	// Presents screen surface.
 	void update();
 };
-}
+} // namespace rb
