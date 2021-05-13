@@ -2,8 +2,6 @@
 #include <SDL2/SDL.h>
 
 namespace rb {
-/* Manages SDL and the client window.
- */
 class Client
 {
 private:

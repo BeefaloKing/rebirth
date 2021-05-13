@@ -6,11 +6,6 @@
 namespace rb {
 Client::Client()
 {
-	if (SDL_Init(SDL_INIT_VIDEO))
-	{
-		throw SDLExcept{"Unable to initialize SDL"};
-	}
-
 	window = SDL_CreateWindow("Rebirth", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480,
 		SDL_WINDOW_SHOWN);
 	if (window == nullptr)
@@ -25,7 +20,6 @@ Client::Client()
 Client::~Client()
 {
 	SDL_DestroyWindow(window);
-	SDL_Quit();
 }
 
 void Client::draw()
