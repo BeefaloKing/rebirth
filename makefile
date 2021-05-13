@@ -17,7 +17,7 @@ LDFLAGS_DEBUG :=
 
 # Release build configuration.
 CXXFLAGS_RELEASE := -std=c++17 -DNDEBUG -O2 -fdata-sections -ffunction-sections -flto
-LDFLAGS_RELEASE := -Wl,-O,--gc-sections,--strip-all
+LDFLAGS_RELEASE := -Wl,-O,--gc-sections,--strip-all -Wl,-subsystem,windows
 
 # Statically link against the standard library
 # I don't like it either, but for now, it's better than distributing the dlls
