@@ -27,7 +27,6 @@ ifeq ($(filter MINGW32 MINGW64,$(MSYSTEM)),)
 $(error Please build with either MinGW32 or MinGW64 MSYS2 subsystems)
 endif
 
-
 .PHONY: all debug release build clean
 all: debug
 
@@ -63,8 +62,7 @@ $(error Must define $$(BUILD_TYPE) if performing a custom build)
 endif
 
 .PHONY: build-target
-build-target: bin/$(SUBPATH)/$(BIN)
-build-target: bld/$(SUBPATH)/copy bld/$(SUBPATH)/redist
+build-target: bin/$(SUBPATH)/$(BIN) bld/$(SUBPATH)/copy bld/$(SUBPATH)/redist
 
 # Link target executable.
 bin/$(SUBPATH)/$(BIN): $(OBJECTS) | bin/$(SUBPATH)

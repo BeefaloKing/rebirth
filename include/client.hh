@@ -1,15 +1,14 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include "window.hh"
 
 namespace rb {
 class Client
 {
 private:
-	SDL_Window* window;
-	SDL_Surface* screen;
+	Window window;
 public:
 	Client();
-	~Client();
 
 	// Placeholder for tutorial.
 	void draw();
