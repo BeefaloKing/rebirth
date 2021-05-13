@@ -22,9 +22,9 @@ void Window::clear()
 	SDL_FillRect(screen, nullptr, SDL_MapRGB(screen->format, 0xC0, 0xFF, 0xEE));
 }
 
-void Window::blit(const Sprite& sprite)
+void Window::draw(const Sprite& sprite, SDL_Rect* dRect)
 {
-	SDL_BlitSurface(sprite.getImage(), nullptr, screen, nullptr);
+	sprite.blit(screen, dRect);
 }
 
 void Window::update()

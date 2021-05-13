@@ -7,11 +7,12 @@ class Sprite
 {
 private:
 	SDL_Surface* image = nullptr;
+	SDL_Rect origin;
 public:
 	Sprite() = delete;
-	Sprite(const std::string &path);
-	~Sprite();
+	Sprite(SDL_Surface* image, SDL_Rect &origin);
 
-	SDL_Surface* getImage() const;
+	// Draws sprite to a given surface.
+	void blit(SDL_Surface* dest, SDL_Rect* dRect) const;
 };
 } // namespace rb

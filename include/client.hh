@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include "resource.hh"
 #include "sprite.hh"
 #include "window.hh"
 
@@ -8,9 +9,7 @@ class Client
 {
 private:
 	Window window;
-
-	// Placeholder for tutorial.
-	Sprite testimage;
+	Resource rManager;
 public:
 	Client();
 

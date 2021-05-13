@@ -18,8 +18,8 @@ public:
 
 	// Fills entire window surface with blank color.
 	void clear();
-	// Copies sprite (to given screen coordinates).
-	void blit(const Sprite &sprite);
+	// Draws a sprite at the given destination in screen coordinates.
+	void draw(const Sprite &sprite, SDL_Rect* dRect);
 	// Presents screen surface.
 	void update();
 };
