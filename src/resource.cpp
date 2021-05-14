@@ -2,6 +2,10 @@
 #include "sdlexcept.hh"
 
 namespace rb {
+Resource::Resource(const SDL_PixelFormat* screenFormat) :
+	nativeFormat{screenFormat}
+{}
+
 Resource::~Resource()
 {
 	for (auto &[path, sprite] : sprites)
@@ -17,20 +21,28 @@ Resource::~Resource()
 
 Sprite* Resource::createSprite(const std::string &path)
 {
-	SDL_Surface* surface = SDL_LoadBMP(path.c_str());
-	if (surface == nullptr)
+	SDL_Surface* loaded = SDL_LoadBMP(path.c_str());
+	if (loaded == nullptr)
 	{
 		throw SDLExcept{"Unable to load image at " + path};
 	}
-	surfaces.push_back(surface);
+	// "The flags are unused and should be set to 0".
+	SDL_Surface* converted = SDL_ConvertSurface(loaded, nativeFormat, 0);
+	if (converted == nullptr)
+	{
+		throw SDLExcept{"Unable to convert image loaded from " + path};
+	}
+
+	SDL_FreeSurface(loaded);
+	surfaces.push_back(converted);
 
 	SDL_Rect origin{
 		.x = 0,
 		.y = 0,
-		.w = surface->w,
-		.h = surface->h,
+		.w = converted->w,
+		.h = converted->h,
 	};
-	return new Sprite{surface, origin};
+	return new Sprite{converted, origin};
 }
 
 const Sprite &Resource::getSprite(const std::string &path)

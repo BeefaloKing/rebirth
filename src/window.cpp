@@ -17,6 +17,11 @@ Window::~Window()
 	SDL_DestroyWindow(window);
 }
 
+const SDL_PixelFormat* Window::getScreenFormat() const
+{
+	return screen->format;
+}
+
 void Window::clear()
 {
 	SDL_FillRect(screen, nullptr, SDL_MapRGB(screen->format, 0xC0, 0xFF, 0xEE));

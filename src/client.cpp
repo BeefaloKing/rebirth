@@ -5,7 +5,8 @@
 
 namespace rb {
 Client::Client() :
-	window{"Rebirth", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN}
+	window{"Rebirth", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN},
+	rManager{window.getScreenFormat()}
 {}
 
 void Client::loop()
