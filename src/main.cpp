@@ -14,8 +14,7 @@ int main(int argc, char* argv[])
 		}
 
 		rb::Client client;
-		client.draw();
-		SDL_Delay(2000);
+		client.loop();
 	}
 	catch (const std::exception &e)
 	{
