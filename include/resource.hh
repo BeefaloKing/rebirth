@@ -10,17 +10,17 @@ class Resource
 {
 private:
 	// For storing sprite atlases when we get there.
-	std::vector<SDL_Surface*> surfaces;
+	std::vector<SDL_Texture*> textures;
 	std::unordered_map<std::string, Sprite*> sprites;
 
-	// The native pixel format used by the screen surface.
-	const SDL_PixelFormat* nativeFormat;
+	// Renderer used by the window.
+	SDL_Renderer* renderer;
 
 	// Loads image at `path` and returns a new Sprite object.
 	Sprite* createSprite(const std::string &path);
 public:
 	Resource() = delete;
-	Resource(const SDL_PixelFormat* screenFormat);
+	Resource(SDL_Renderer* renderer);
 	~Resource();
 
 	const Sprite &getSprite(const std::string &path);

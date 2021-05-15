@@ -2,38 +2,46 @@
 #include "sdlexcept.hh"
 
 namespace rb {
-Window::Window(const std::string &title, int x, int y, int w, int h, uint32_t flags) :
-	window{SDL_CreateWindow(title.c_str(), x, y, w, h, flags)}
+Window::Window(const std::string &title, int x, int y, int w, int h, uint32_t windowFlags,
+	uint32_t rendererFlags)
 {
+	window = SDL_CreateWindow(title.c_str(), x, y, w, h, windowFlags);
 	if (window == nullptr)
 	{
 		throw SDLExcept{"Unable to create window"};
 	}
-	screen = SDL_GetWindowSurface(window);
+
+	renderer = SDL_CreateRenderer(window, -1, rendererFlags);
+	if (renderer == nullptr)
+	{
+		throw SDLExcept{"Unable to create renderer"};
+	}
 }
 
 Window::~Window()
 {
+	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 }
 
-const SDL_PixelFormat* Window::getScreenFormat() const
+SDL_Renderer* Window::getRenderer()
 {
-	return screen->format;
+	return renderer;
 }
 
 void Window::clear()
 {
-	SDL_FillRect(screen, nullptr, SDL_MapRGB(screen->format, 0xC0, 0xFF, 0xEE));
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderClear(renderer);
 }
 
 void Window::draw(const Sprite& sprite, SDL_Rect* dRect)
 {
-	sprite.blit(screen, dRect);
+	sprite.draw(renderer, dRect);
 }
 
 void Window::update()
 {
-	SDL_UpdateWindowSurface(window);
+	SDL_RenderPresent(renderer);
 }
 } // namespace rb

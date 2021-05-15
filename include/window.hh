@@ -9,16 +9,17 @@ class Window
 {
 private:
 	SDL_Window* window = nullptr;
-	SDL_Surface* screen = nullptr;
+	SDL_Renderer* renderer = nullptr;
 public:
 	Window() = delete;
 	// Parameters passed through to `SDL_CreateWindow()`.
-	Window(const std::string &title, int x, int y, int w, int h, uint32_t flags);
+	Window(const std::string &title, int x, int y, int w, int h, uint32_t windowFlags,
+		uint32_t rendererFlags);
 	~Window();
 
-	// Returns the screen's pixel format as it is needed elsewhere.
-	// I'd rather avoid exposing the surface itself though if I can avoid it.
-	const SDL_PixelFormat* getScreenFormat() const;
+	// Returns the renderer created from the window as it is needed elsewhere.
+	// Maybe this is a sign that Window shouldn't own the renderer.
+	SDL_Renderer* getRenderer();
 
 	// Fills entire window surface with blank color.
 	void clear();

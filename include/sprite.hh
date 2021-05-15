@@ -6,13 +6,13 @@ namespace rb {
 class Sprite
 {
 private:
-	SDL_Surface* image = nullptr;
+	SDL_Texture* texture = nullptr;
 	SDL_Rect origin;
 public:
 	Sprite() = delete;
-	Sprite(SDL_Surface* image, SDL_Rect &origin);
+	Sprite(SDL_Texture* texture, SDL_Rect &origin);
 
-	// Draws sprite to a given surface.
-	void blit(SDL_Surface* dest, SDL_Rect* dRect) const;
+	// Renders sprite at the given screen coordinates.
+	void draw(SDL_Renderer* renderer, SDL_Rect* dRect) const;
 };
 } // namespace rb

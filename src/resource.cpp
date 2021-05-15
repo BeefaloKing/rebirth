@@ -3,8 +3,8 @@
 #include "sdlexcept.hh"
 
 namespace rb {
-Resource::Resource(const SDL_PixelFormat* screenFormat) :
-	nativeFormat{screenFormat}
+Resource::Resource(SDL_Renderer* renderer) :
+	renderer{renderer}
 {}
 
 Resource::~Resource()
@@ -14,9 +14,9 @@ Resource::~Resource()
 		delete sprite;
 	}
 
-	for (SDL_Surface* surface : surfaces)
+	for (SDL_Texture* texture : textures)
 	{
-		SDL_FreeSurface(surface);
+		SDL_DestroyTexture(texture);
 	}
 }
 
@@ -27,22 +27,22 @@ Sprite* Resource::createSprite(const std::string &path)
 	{
 		throw IMGExcept{"Unable to load image at " + path};
 	}
-	// "The flags are unused and should be set to 0".
-	SDL_Surface* converted = SDL_ConvertSurface(loaded, nativeFormat, 0);
+
+	SDL_Texture* converted = SDL_CreateTextureFromSurface(renderer, loaded);
 	if (converted == nullptr)
 	{
-		throw SDLExcept{"Unable to convert image loaded from " + path};
+		throw SDLExcept{"Unable to create texture of image loaded from " + path};
 	}
-
-	SDL_FreeSurface(loaded);
-	surfaces.push_back(converted);
 
 	SDL_Rect origin{
 		.x = 0,
 		.y = 0,
-		.w = converted->w,
-		.h = converted->h,
+		.w = loaded->w,
+		.h = loaded->h,
 	};
+	SDL_FreeSurface(loaded);
+
+	textures.push_back(converted);
 	return new Sprite{converted, origin};
 }
 

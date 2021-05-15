@@ -2,13 +2,13 @@
 #include "sdlexcept.hh"
 
 namespace rb {
-Sprite::Sprite(SDL_Surface* image, SDL_Rect &origin) :
-	image{image},
+Sprite::Sprite(SDL_Texture* texture, SDL_Rect &origin) :
+	texture{texture},
 	origin{origin}
 {}
 
-void Sprite::blit(SDL_Surface* dest, SDL_Rect* dRect) const
+void Sprite::draw(SDL_Renderer* renderer, SDL_Rect* dRect) const
 {
-	SDL_BlitSurface(image, &origin, dest, dRect);
+	SDL_RenderCopy(renderer, texture, &origin, dRect);
 }
 } // namespace rb
