@@ -1,6 +1,5 @@
 #include "client.hh"
 #include <SDL2/SDL.h>
-#include <stdexcept>
 #include "sdlexcept.hh"
 
 namespace rb {
@@ -61,7 +60,7 @@ void Client::draw()
 	window.clear();
 	// In the future, some sort of "entity" should maintain a copy of the sprites it needs.
 	// Manually asking the resource manager for sprites like this should not be done.
-	window.draw(rManager.getSprite("assets/testimage.bmp"), nullptr);
+	window.draw(rManager.getSprite("assets/testimage.png"), nullptr);
 	window.update();
 }
 } //namespace rb

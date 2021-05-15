@@ -1,3 +1,4 @@
+#include <SDL2/SDL_image.h>
 #include "resource.hh"
 #include "sdlexcept.hh"
 
@@ -21,10 +22,10 @@ Resource::~Resource()
 
 Sprite* Resource::createSprite(const std::string &path)
 {
-	SDL_Surface* loaded = SDL_LoadBMP(path.c_str());
+	SDL_Surface* loaded = IMG_Load(path.c_str());
 	if (loaded == nullptr)
 	{
-		throw SDLExcept{"Unable to load image at " + path};
+		throw IMGExcept{"Unable to load image at " + path};
 	}
 	// "The flags are unused and should be set to 0".
 	SDL_Surface* converted = SDL_ConvertSurface(loaded, nativeFormat, 0);

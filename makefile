@@ -8,8 +8,10 @@ COPY := copy
 # Build configuration.
 CC := g++
 CPPFLAGS := -Iinclude
-LDLIBS := -lmingw32 -lSDL2main -lSDL2
-REDIST_FILES := SDL2.dll
+LDLIBS := -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
+REDIST_FILES := SDL2.dll SDL2_image.dll
+REDIST_FILES += libjpeg-8.dll libpng16-16.dll libtiff-5.dll libwebp-7.dll
+REDIST_FILES += zlib1.dll libdeflate.dll liblzma-5.dll libzstd.dll
 
 # Debug build configuration.
 CXXFLAGS_DEBUG := -std=c++17 -g -O0 -Wall

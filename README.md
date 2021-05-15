@@ -12,9 +12,11 @@ Install the 32 or 64 bit toolchain and build dependencies.
 ```
 pacman -S mingw-w64-i686-toolchain \
 	mingw-w64-i686-SDL2
+	mingw-w64-i686-SDL2_image
 
 pacman -S mingw-w64-x86_64-toolchain \
 	mingw-w64-x86_64-SDL2
+	mingw-w64-x86_64-SDL2_image
 ```
 Launch `MSYS2 MinGW 32-bit` or `MSYS2 MinGW 64-bit` to start MSYS2 with the appropriate subsystem.  
 From the project root, run `make`. Binaries will be located in `./bin/<Architecture>/<BuildType>/`.
